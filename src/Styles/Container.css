@@ -3,7 +3,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   gap: 50px;
 }
 
@@ -19,6 +19,10 @@
   gap: 20px;
   align-items: center;
   text-align: center;
+}
+
+.box:last-of-type {
+  margin-bottom: 15px;
 }
 
 .number {
@@ -50,4 +54,20 @@ form input[type="text"] {
 
 canvas {
   cursor: pointer;
+}
+
+h1 {
+  margin-top: 15px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 400px) {
+  .box-plots {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form form {
+    flex-direction: column;
+  }
 }
