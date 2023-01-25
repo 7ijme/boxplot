@@ -24,6 +24,10 @@ export default function Container({}: Props) {
       title: "Aardrijkskunde",
       numbers: [9, 8.9, 10],
     },
+    {
+      title: "Frans",
+      numbers: [6.6, 9.1],
+    },
   ]);
 
   useEffect(() => {
@@ -39,6 +43,12 @@ export default function Container({}: Props) {
           <BoxPlot
             key={i}
             data={d}
+            deleteBoxPlot={(title: string) => {
+              const newData: ParsedData[] = Object.values(data).filter(
+                (d) => d.title !== title
+              );
+              setData(newData);
+            }}
           />
         ))}
       </div>
