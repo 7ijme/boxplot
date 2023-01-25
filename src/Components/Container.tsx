@@ -84,7 +84,8 @@ export default function Container({}: Props) {
 
   return (
     <div className="container">
-      <h1>Boxplots van cijfers profielkeuze Tijme</h1>
+      <h1>Boxplots van cijfers</h1>
+      <h5>By Tijme</>
       <Form
         numbers={numbers}
         setNumbers={setNumbers}
