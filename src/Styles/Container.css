@@ -20,3 +20,34 @@
   align-items: center;
   text-align: center;
 }
+
+.number {
+  cursor: pointer;
+  /*  */
+}
+.numberList {
+  user-select: none;
+}
+
+.form {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 20px;
+}
+
+form input[type="text"] {
+  width: 40px;
+  padding: 10px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+}
+
+canvas {
+  cursor: pointer;
+}

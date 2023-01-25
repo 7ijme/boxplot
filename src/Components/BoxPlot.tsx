@@ -2,11 +2,15 @@ import React, { useEffect, useRef } from "react";
 
 type Props = {
   data: ParsedData;
-  deleteBoxPlot: (title: string) => void;
+  allData: ParsedData[];
+  deleteBoxPlot: (index: number) => void;
+  setNumbers: React.Dispatch<React.SetStateAction<number[]>>;
+  setDataEditingIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 export type ParsedData = {
   numbers: number[];
   title: string;
+  index: number;
 };
 type BoxPlotData = {
   min: number;
@@ -15,12 +19,19 @@ type BoxPlotData = {
   quartiles: [number, number];
 };
 
-export default function BoxPlot({ data, deleteBoxPlot }: Props) {
+export default function BoxPlot({
+  data,
+  allData,
+  deleteBoxPlot,
+  setNumbers,
+  setDataEditingIndex,
+}: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const margin = 10;
   const intervalWitdh = 25;
 
   useEffect(() => {
+    console.log("data changed");
     if (!canvasRef.current) return;
 
     const ctx = canvasRef.current.getContext("2d");
@@ -53,7 +64,7 @@ export default function BoxPlot({ data, deleteBoxPlot }: Props) {
     ctx.fillText(data.title, ctx.canvas.width / 2, 20);
 
     drawBoxPlot(ctx, drawData, height, intervalWitdh, margin);
-  }, [data]);
+  }, [allData]);
 
   function drawBoxPlot(
     ctx: CanvasRenderingContext2D,
@@ -171,17 +182,23 @@ export default function BoxPlot({ data, deleteBoxPlot }: Props) {
     };
   }
 
+  const handleClick = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    setDataEditingIndex(data.index);
+    setNumbers(data.numbers);
+  };
+
   return (
     <div className="box">
       {/* <div>{data.title}</div> */}
       <canvas
+        onClick={handleClick}
         ref={canvasRef}
         height={75}
         width={margin * 2 + 10 * intervalWitdh}></canvas>
       {/* add button with trash icon */}
       <button
         className="deleteButton"
-        onClick={deleteBoxPlot.bind(null, data.title)}>
+        onClick={deleteBoxPlot.bind(null, data.index)}>
         <svg
           fill="#fff"
           version="1.1"
