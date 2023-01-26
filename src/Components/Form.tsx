@@ -87,15 +87,14 @@ export default function Form({
         <div className="numberList">
           {numbers.length > 0
             ? numbers.map((n, i) => (
-                <>
-                  <span
-                    className="number"
-                    onClick={removeItemFromNumbers}
-                    data-i={i}>
-                    {n}
-                  </span>
+                <span
+                  key={i}
+                  className="number"
+                  onClick={removeItemFromNumbers}
+                  data-i={i}>
+                  {n}
                   {i === numbers.length - 1 ? "" : ", "}
-                </>
+                </span>
               ))
             : "No numbers"}
         </div>

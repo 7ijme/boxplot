@@ -47,7 +47,6 @@ export default function Container({}: Props) {
   const [numbers, setNumbers] = React.useState<number[]>([]);
   const [hasGottenData, setHasGottenData] = React.useState(false);
   const [dataEditingIndex, setDataEditingIndex] = React.useState<number>(-1);
-  const [savingAsImage, setSavingAsImage] = React.useState(false);
 
   useEffect(() => {
     // get data from local storage
@@ -95,8 +94,21 @@ export default function Container({}: Props) {
     }
   };
 
-  const saveAsImage = () => {
-    setSavingAsImage(!savingAsImage);
+  const saveImage: React.MouseEventHandler<HTMLAnchorElement> = (a) => {
+    if (dataEditingIndex === -1) {
+      a.preventDefault();
+      a.currentTarget.href = "";
+      return;
+    }
+    const canvas = document.querySelector(
+      `canvas[data-index="${dataEditingIndex}"]`
+    ) as HTMLCanvasElement;
+    if (canvas) {
+      a.currentTarget.download = `${
+        data.find((i) => i.index === dataEditingIndex)?.title
+      }.png`;
+      a.currentTarget.href = canvas.toDataURL("image/png");
+    }
   };
 
   return (
@@ -116,8 +128,6 @@ export default function Container({}: Props) {
         {data.map((d, i) => (
           <BoxPlot
             setNumbers={setNumbers}
-            savingAsImage={savingAsImage}
-            setSavingAsImage={setSavingAsImage}
             key={i}
             data-index={i}
             data={d}
@@ -133,10 +143,17 @@ export default function Container({}: Props) {
         ))}
       </div>
       <div className="aditional-features">
-        <button onClick={saveAsImage}>
-          Save as image{" "}
-          {savingAsImage ? <span>Click the plot you want to save</span> : ""}
-        </button>
+        <a
+          href="#"
+          className="button"
+          download={
+            dataEditingIndex !== -1
+              ? `${data.find((i) => i.index === dataEditingIndex)?.title}.png`
+              : "boxplot.png"
+          }
+          onClick={saveImage}>
+          Save as image
+        </a>
         <button
           onClick={() => {
             localStorage.clear();
