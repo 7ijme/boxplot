@@ -26,7 +26,7 @@
 }
 
 .box:last-of-type {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .number {
@@ -58,7 +58,7 @@ footer {
   gap: 5px;
   height: 50px;
   position: absolute;
-  bottom: 30px;
+  bottom: 50px;
   /* footer should be at bottom  without margin */
 }
 
