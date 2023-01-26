@@ -45,7 +45,6 @@ export default function Form({
   };
 
   const removeItemFromNumbers = (e: React.MouseEvent<HTMLSpanElement>) => {
-    console.log(e.currentTarget.dataset);
     const index = +(e.currentTarget.dataset.i || 0);
     const newNumbers = [...numbers];
     newNumbers.splice(index, 1);

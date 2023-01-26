@@ -103,3 +103,7 @@ h1 {
     flex-direction: column;
   }
 }
+
+code {
+  padding: 0 5px;
+}

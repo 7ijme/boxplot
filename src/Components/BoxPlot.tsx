@@ -35,7 +35,6 @@ export default function BoxPlot({
   const intervalWitdh = 25;
 
   useEffect(() => {
-    console.log("data changed");
     if (!canvasRef.current) return;
 
     const ctx = canvasRef.current.getContext("2d");
@@ -193,6 +192,8 @@ export default function BoxPlot({
       if (canvas) {
         const image = canvas.toDataURL("image/png");
         // open link in new tab
+        // give name to image
+        image.replace("image/png", "image/octet-stream");
         window.open(image, "_blank");
       }
 

@@ -60,7 +60,7 @@ export default function Container({}: Props) {
 
   useEffect(() => {
     // set data to local storage
-    console.log("update");
+
     if (!hasGottenData) return;
     localStorage.setItem("data", JSON.stringify(data));
   }, [data]);
@@ -87,14 +87,11 @@ export default function Container({}: Props) {
       const newData = [...data].map((d) => {
         if (d.index === dataEditingIndex) {
           d.numbers = numbers;
-          console.log(d, numbers, "editing here");
         }
         return d;
       });
-      console.log(newData, "new data");
-      setData(newData);
 
-      console.log(data);
+      setData(newData);
     }
   };
 
