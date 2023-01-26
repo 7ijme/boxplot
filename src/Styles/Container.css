@@ -58,7 +58,8 @@ footer {
   gap: 5px;
   height: 50px;
   position: absolute;
-  bottom: 15px;
+  bottom: 0px;
+  padding-bottom:15px;
   /* footer should be at bottom  without margin */
 }
 
