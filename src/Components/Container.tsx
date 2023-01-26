@@ -94,23 +94,6 @@ export default function Container({}: Props) {
     }
   };
 
-  const saveImage: React.MouseEventHandler<HTMLAnchorElement> = (a) => {
-    if (dataEditingIndex === -1) {
-      a.preventDefault();
-      a.currentTarget.href = "";
-      return;
-    }
-    const canvas = document.querySelector(
-      `canvas[data-index="${dataEditingIndex}"]`
-    ) as HTMLCanvasElement;
-    if (canvas) {
-      a.currentTarget.download = `${
-        data.find((i) => i.index === dataEditingIndex)?.title
-      }.png`;
-      a.currentTarget.href = canvas.toDataURL("image/png");
-    }
-  };
-
   return (
     <div className="container">
       <header>
@@ -144,14 +127,22 @@ export default function Container({}: Props) {
       </div>
       <div className="aditional-features">
         <a
-          href="#"
+          href={
+            (
+              document.querySelector(
+                `canvas[data-index="${dataEditingIndex}"]`
+              ) as HTMLCanvasElement
+            )?.toDataURL("image/png") || ""
+          }
           className="button"
           download={
             dataEditingIndex !== -1
               ? `${data.find((i) => i.index === dataEditingIndex)?.title}.png`
               : "boxplot.png"
           }
-          onClick={saveImage}>
+          onClick={(e) => {
+            if (dataEditingIndex === -1) e.preventDefault();
+          }}>
           Save as image
         </a>
         <button
@@ -171,7 +162,8 @@ export default function Container({}: Props) {
             href="https://github.com/7ijme/boxplot"
             target="_blank">
             Source
-          </a>{" • "}
+          </a>
+          {" • "}
           By Tijme
         </code>
       </footer>
