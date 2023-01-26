@@ -171,7 +171,7 @@ export default function Container({}: Props) {
             href="https://github.com/7ijme/boxplot"
             target="_blank">
             Source
-          </a>{" "}
+          </a>{" • "}
           By Tijme
         </code>
       </footer>
