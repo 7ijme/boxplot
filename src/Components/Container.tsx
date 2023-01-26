@@ -86,6 +86,7 @@ export default function Container({}: Props) {
       const newData = [...data].map((d) => {
         if (d.index === dataEditingIndex) {
           d.numbers = numbers;
+          d.title = title ?? d.title;
         }
         return d;
       });
@@ -121,6 +122,8 @@ export default function Container({}: Props) {
                 (d) => d.index !== index
               );
               setData(newData);
+              setDataEditingIndex(-1);
+              setNumbers([]);
             }}
           />
         ))}
