@@ -11,7 +11,7 @@ window.addEventListener("load",function() {
   }, 0);
 }); 
 
-var preventDefault = function(e) {
+var preventDefault = function(e: TouchEvent) {
     e.preventDefault();
     return false;
 };
