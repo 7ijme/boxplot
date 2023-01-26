@@ -1,14 +1,17 @@
 import React from "react";
+import { ParsedData } from "./BoxPlot";
 
 type Props = {
   numbers: number[];
   setNumbers: React.Dispatch<React.SetStateAction<number[]>>;
   dataEditingIndex: number;
   setDataEditingIndex: React.Dispatch<React.SetStateAction<number>>;
+  data: ParsedData[];
   createNewPlot: () => void;
 };
 
 export default function Form({
+  data,
   numbers,
   setNumbers,
   createNewPlot,
@@ -62,15 +65,24 @@ export default function Form({
             />
           </label>
           <button type="submit">Add number</button>
+          <button
+            onClick={() => {
+              setNumbers([]);
+            }}>
+            Clear
+          </button>
           <button onClick={createNewPlot}>
-            {dataEditingIndex != -1 ? "Edit " + dataEditingIndex : "Create"}
+            {dataEditingIndex != -1
+              ? "Edit " + data.find((i) => i.index === dataEditingIndex)?.title
+              : "Create new"}
           </button>
           <button
             onClick={() => {
+              if (dataEditingIndex === -1) return;
               setDataEditingIndex(-1);
               setNumbers([]);
             }}>
-            Unlink
+            Stop editing
           </button>
         </form>
         <div className="numberList">

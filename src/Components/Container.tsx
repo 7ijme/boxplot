@@ -29,9 +29,19 @@ export default function Container({}: Props) {
       index: 3,
     },
     {
+      title: "Engels",
+      numbers: [9.6, 8.4, 9.5, 8.1],
+      index: 4,
+    },
+    {
+      title: "Nederlands",
+      numbers: [7.5, 7.5, 8.5],
+      index: 5,
+    },
+    {
       title: "Frans",
       numbers: [6.6, 9.1],
-      index: 4,
+      index: 6,
     },
   ]);
   const [numbers, setNumbers] = React.useState<number[]>([]);
@@ -68,6 +78,11 @@ export default function Container({}: Props) {
       setData([...data, newData]);
       setNumbers([]);
     } else {
+      const title = prompt(
+        "Enter a title for the new plot",
+        data[dataEditingIndex].title
+      );
+
       const newData = [...data].map((d) => {
         if (d.index === dataEditingIndex) {
           d.numbers = numbers;
@@ -84,9 +99,11 @@ export default function Container({}: Props) {
 
   return (
     <div className="container">
-      <h1>Boxplots van cijfers</h1>
-      <h5>By Tijme</h5>
+      <header>
+        <h1>Boxplots van cijfers</h1>
+      </header>
       <Form
+        data={data}
         numbers={numbers}
         setNumbers={setNumbers}
         createNewPlot={createNewPlot}
@@ -111,6 +128,25 @@ export default function Container({}: Props) {
           />
         ))}
       </div>
+      <footer>
+        <button
+          onClick={() => {
+            localStorage.clear();
+            // reload page
+            window.location.reload();
+          }}>
+          Clear data
+        </button>
+        <code>
+          Created with vite + React + TypeScript <br />
+          <a
+            href="https://github.com/7ijme/boxplot"
+            target="_blank">
+            Source
+          </a>{" "}
+          By Tijme
+        </code>
+      </footer>
     </div>
   );
 }
