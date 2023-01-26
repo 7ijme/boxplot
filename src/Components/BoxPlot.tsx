@@ -6,6 +6,8 @@ type Props = {
   deleteBoxPlot: (index: number) => void;
   setNumbers: React.Dispatch<React.SetStateAction<number[]>>;
   setDataEditingIndex: React.Dispatch<React.SetStateAction<number>>;
+  savingAsImage: boolean;
+  setSavingAsImage: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export type ParsedData = {
   numbers: number[];
@@ -25,6 +27,8 @@ export default function BoxPlot({
   deleteBoxPlot,
   setNumbers,
   setDataEditingIndex,
+  savingAsImage,
+  setSavingAsImage,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const margin = 10;
@@ -183,6 +187,18 @@ export default function BoxPlot({
   }
 
   const handleClick = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    if (savingAsImage) {
+      // save this canvas as an image
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const image = canvas.toDataURL("image/png");
+        // open link in new tab
+        window.open(image, "_blank");
+      }
+
+      setSavingAsImage(false);
+      return;
+    }
     setDataEditingIndex(data.index);
     setNumbers(data.numbers);
   };

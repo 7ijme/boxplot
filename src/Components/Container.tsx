@@ -47,6 +47,7 @@ export default function Container({}: Props) {
   const [numbers, setNumbers] = React.useState<number[]>([]);
   const [hasGottenData, setHasGottenData] = React.useState(false);
   const [dataEditingIndex, setDataEditingIndex] = React.useState<number>(-1);
+  const [savingAsImage, setSavingAsImage] = React.useState(false);
 
   useEffect(() => {
     // get data from local storage
@@ -97,6 +98,10 @@ export default function Container({}: Props) {
     }
   };
 
+  const saveAsImage = () => {
+    setSavingAsImage(!savingAsImage);
+  };
+
   return (
     <div className="container">
       <header>
@@ -114,6 +119,8 @@ export default function Container({}: Props) {
         {data.map((d, i) => (
           <BoxPlot
             setNumbers={setNumbers}
+            savingAsImage={savingAsImage}
+            setSavingAsImage={setSavingAsImage}
             key={i}
             data-index={i}
             data={d}
@@ -128,7 +135,11 @@ export default function Container({}: Props) {
           />
         ))}
       </div>
-      <footer>
+      <div className="aditional-features">
+        <button onClick={saveAsImage}>
+          Save as image{" "}
+          {savingAsImage ? <span>Click the plot you want to save</span> : ""}
+        </button>
         <button
           onClick={() => {
             localStorage.clear();
@@ -137,6 +148,9 @@ export default function Container({}: Props) {
           }}>
           Clear data
         </button>
+      </div>
+
+      <footer>
         <code>
           Created with vite + React + TypeScript <br />
           <a
