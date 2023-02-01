@@ -1,12 +1,9 @@
 .container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
   min-height: 100vh;
-  gap: 50px;
-  padding-bottom: 100px;
-  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  place-items: center;
+  gap: 20px;
 }
 
 .box-plots {
@@ -23,10 +20,6 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-}
-
-.box:last-of-type {
-  margin-bottom: 50px;
 }
 
 .number {
@@ -57,8 +50,7 @@ footer {
   flex-direction: column;
   gap: 5px;
   height: 50px;
-  position: absolute;
-  bottom: 50px;
+  margin: 20px 0;
   /* footer should be at bottom  without margin */
 }
 
